@@ -40,48 +40,49 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/70 backdrop-blur-xs">
       <div className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col">
         
         {/* Modal Top Header */}
-        <div className="bg-[#0A192F] px-6 py-4 flex items-center justify-between text-white border-b border-amber-500/20 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-amber-400 text-[#0A192F] font-bold flex items-center justify-center text-sm">
+        <div className="bg-[#0A192F] px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between text-white border-b border-amber-500/20 shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-8 h-8 rounded-lg bg-amber-400 text-[#0A192F] font-bold flex items-center justify-center text-sm shrink-0">
               <Code2 className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-base font-bold tracking-tight">
+              <h2 className="text-sm sm:text-base font-bold tracking-tight">
                 Technical Architecture & Database Schema
               </h2>
-              <div className="text-[11px] text-amber-300">
+              <div className="text-[10px] sm:text-[11px] text-amber-300">
                 PDPM IIITDM Jabalpur Peer-to-Peer E-Commerce Platform
               </div>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1 rounded-md transition-colors"
+            className="text-slate-400 hover:text-white p-1.5 rounded-md transition-colors"
+            aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Tab Navigation Controls (Functional buttons, not pills) */}
-        <div className="px-6 py-2.5 bg-slate-100 border-b border-slate-200 flex items-center gap-2 overflow-x-auto shrink-0">
+        {/* Tab Navigation Controls (Functional scrollable tabs) */}
+        <div className="px-3 sm:px-6 py-2 sm:py-2.5 bg-slate-100 border-b border-slate-200 flex items-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-none shrink-0">
           <button
             onClick={() => setActiveTab('stack')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
+            className={`px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeTab === 'stack'
                 ? 'bg-white text-[#0A192F] shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            1. Recommended Tech Stack
+            1. Tech Stack
           </button>
 
           <button
             onClick={() => setActiveTab('schema')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
+            className={`px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeTab === 'schema'
                 ? 'bg-white text-[#0A192F] shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -92,35 +93,35 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
 
           <button
             onClick={() => setActiveTab('endpoint')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
+            className={`px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeTab === 'endpoint'
                 ? 'bg-white text-[#0A192F] shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            3. Core Verified Review Endpoint Logic
+            3. Review Endpoint Logic
           </button>
 
           <button
             onClick={() => setActiveTab('diagram')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
+            className={`px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeTab === 'diagram'
                 ? 'bg-white text-[#0A192F] shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            4. Campus Workflow & Security Rules
+            4. Security Rules & Flow
           </button>
         </div>
 
         {/* Modal Scroll Content */}
-        <div className="p-6 overflow-y-auto space-y-6 flex-1">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 flex-1">
           
           {/* TAB 1: TECH STACK BREAKDOWN */}
           {activeTab === 'stack' && (
-            <div className="space-y-6 text-xs">
-              <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-200/60 text-slate-700">
-                <h3 className="text-sm font-bold text-[#0A192F] mb-1">
+            <div className="space-y-5 text-xs">
+              <div className="bg-blue-50/50 p-3.5 sm:p-4 rounded-xl border border-blue-200/60 text-slate-700">
+                <h3 className="text-xs sm:text-sm font-bold text-[#0A192F] mb-1">
                   Deliverable 1: Recommended Full-Stack Architecture
                 </h3>
                 <p className="text-xs text-slate-600">
@@ -128,15 +129,15 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
                 
                 {/* Frontend Card */}
-                <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3">
+                <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-2.5">
                   <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
                     <Layers className="w-4 h-4 text-amber-600" />
                     <span>Frontend Tier</span>
                   </div>
-                  <div className="space-y-2 text-slate-600">
+                  <div className="space-y-1.5 text-slate-600">
                     <div>
                       <strong className="text-slate-800">Framework:</strong> React 19 + TypeScript + Vite
                     </div>
@@ -144,54 +145,54 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
                       <strong className="text-slate-800">Styling:</strong> Tailwind CSS v4 with official IIITDMJ colors (Navy #0A192F, Gold #F59E0B, White #FFFFFF)
                     </div>
                     <div>
-                      <strong className="text-slate-800">Motion:</strong> Motion (Framer Motion v12) for smooth tab & modal settles
+                      <strong className="text-slate-800">Motion:</strong> Motion (Framer Motion v12)
                     </div>
                     <div>
-                      <strong className="text-slate-800">Design System:</strong> Anti-slop zero-pill typography hierarchy, 60-30-10 distribution, 1440px desktop baseline
+                      <strong className="text-slate-800">Responsive:</strong> Mobile-first layout with native touch navigation
                     </div>
                   </div>
                 </div>
 
                 {/* Backend Card */}
-                <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3">
+                <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-2.5">
                   <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
                     <Server className="w-4 h-4 text-blue-600" />
                     <span>Backend Tier</span>
                   </div>
-                  <div className="space-y-2 text-slate-600">
+                  <div className="space-y-1.5 text-slate-600">
                     <div>
                       <strong className="text-slate-800">Runtime:</strong> Node.js (v20+ LTS)
                     </div>
                     <div>
-                      <strong className="text-slate-800">REST API:</strong> Express.js with TypeScript controllers
+                      <strong className="text-slate-800">REST API:</strong> Express.js with TypeScript
                     </div>
                     <div>
-                      <strong className="text-slate-800">Auth Engine:</strong> JWT with server-side regex restricting email to <code>/^[a-zA-Z0-9._%+-]+@iiitdmj\.ac\.in$/</code>
+                      <strong className="text-slate-800">Auth Engine:</strong> JWT with regex email domain validation
                     </div>
                     <div>
-                      <strong className="text-slate-800">Media CDN:</strong> Cloudinary API / Firebase Storage with 5MB client image compression
+                      <strong className="text-slate-800">Storage:</strong> Firebase Storage / Cloudinary API
                     </div>
                   </div>
                 </div>
 
                 {/* Database Card */}
-                <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3">
+                <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-2.5">
                   <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
                     <Database className="w-4 h-4 text-emerald-600" />
                     <span>Database & Indexing</span>
                   </div>
-                  <div className="space-y-2 text-slate-600">
+                  <div className="space-y-1.5 text-slate-600">
                     <div>
-                      <strong className="text-slate-800">Database:</strong> MongoDB with Mongoose ODM or Cloud Firestore
+                      <strong className="text-slate-800">Database:</strong> MongoDB (Mongoose) or Firestore
                     </div>
                     <div>
-                      <strong className="text-slate-800">Core Collections:</strong> Users, Products, Orders, Reviews
+                      <strong className="text-slate-800">Collections:</strong> Users, Products, Orders, Reviews
                     </div>
                     <div>
-                      <strong className="text-slate-800">High-Performance Index:</strong> Compound index <code>{`{ buyerId: 1, productId: 1, status: 1 }`}</code> for O(1) review verification
+                      <strong className="text-slate-800">Compound Index:</strong> <code>{`{ buyerId: 1, productId: 1, status: 1 }`}</code>
                     </div>
                     <div>
-                      <strong className="text-slate-800">Hostel Registry:</strong> Strict enum for Hall 1, Hall 3, Hall 4, Panini, Nagarjuna, Saraswati
+                      <strong className="text-slate-800">Hostel Registry:</strong> Hall 1, 3, 4, Panini, Nagarjuna, Saraswati
                     </div>
                   </div>
                 </div>
@@ -199,11 +200,11 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
               </div>
 
               {/* Security & Verification Table */}
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <div className="p-3.5 sm:p-4 bg-slate-50 rounded-xl border border-slate-200">
                 <h4 className="font-bold text-slate-900 mb-2">
                   Campus Verification Guarantees
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-600">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-slate-600">
                   <div className="flex items-start gap-2">
                     <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <div>
@@ -223,19 +224,19 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
 
           {/* TAB 2: DATABASE SCHEMA */}
           {activeTab === 'schema' && (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
+            <div className="space-y-3.5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900">
                     Deliverable 2: Complete Database Schema (Mongoose & Firestore)
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-[11px] sm:text-xs text-slate-500">
                     Production TypeScript schema definitions for Users, Products, Orders, and Reviews with strict constraints and compound indexes.
                   </p>
                 </div>
                 <button
                   onClick={() => copyToClipboard(DATABASE_SCHEMA_CODE, 'schema')}
-                  className="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center gap-1.5"
+                  className="w-full sm:w-auto px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center justify-center gap-1.5"
                 >
                   {copiedKey === 'schema' ? (
                     <>
@@ -251,7 +252,7 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
                 </button>
               </div>
 
-              <pre className="p-4 bg-slate-900 text-slate-100 rounded-xl text-xs font-mono overflow-x-auto leading-relaxed border border-slate-800">
+              <pre className="p-3 sm:p-4 bg-slate-900 text-slate-100 rounded-xl text-[10px] sm:text-xs font-mono overflow-x-auto leading-relaxed border border-slate-800">
                 {DATABASE_SCHEMA_CODE}
               </pre>
             </div>
@@ -259,19 +260,19 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
 
           {/* TAB 3: VERIFIED REVIEW ENDPOINT */}
           {activeTab === 'endpoint' && (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
+            <div className="space-y-3.5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900">
                     Deliverable 4: Core Backend/API Endpoint Logic for Verified Reviews
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-[11px] sm:text-xs text-slate-500">
                     Express.js handler enforcing atomicity, transaction safety, and strict "Delivered" order status verification.
                   </p>
                 </div>
                 <button
                   onClick={() => copyToClipboard(VERIFIED_REVIEW_ENDPOINT_CODE, 'endpoint')}
-                  className="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center gap-1.5"
+                  className="w-full sm:w-auto px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center justify-center gap-1.5"
                 >
                   {copiedKey === 'endpoint' ? (
                     <>
@@ -291,7 +292,7 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
                 <strong>Enforcement Mechanism:</strong> If a customer tries to submit a review before the item arrives, the endpoint returns an HTTP <code>403 Forbidden</code> with error code <code>ORDER_NOT_DELIVERED</code>.
               </div>
 
-              <pre className="p-4 bg-slate-900 text-slate-100 rounded-xl text-xs font-mono overflow-x-auto leading-relaxed border border-slate-800">
+              <pre className="p-3 sm:p-4 bg-slate-900 text-slate-100 rounded-xl text-[10px] sm:text-xs font-mono overflow-x-auto leading-relaxed border border-slate-800">
                 {VERIFIED_REVIEW_ENDPOINT_CODE}
               </pre>
             </div>
@@ -299,15 +300,15 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
 
           {/* TAB 4: WORKFLOW & SECURITY DIAGRAM */}
           {activeTab === 'diagram' && (
-            <div className="space-y-5 text-xs text-slate-700">
+            <div className="space-y-4 text-xs text-slate-700">
               <h3 className="text-sm font-bold text-slate-900">
                 Campus Lifecycle & Security Enforcement
               </h3>
 
-              <div className="space-y-3">
-                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+              <div className="space-y-2.5">
+                <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
                   <div className="font-bold text-slate-900 flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-[#0A192F] text-white flex items-center justify-center text-[10px]">1</span>
+                    <span className="w-5 h-5 rounded-full bg-[#0A192F] text-white flex items-center justify-center text-[10px] shrink-0">1</span>
                     <span>Student Onboarding & Roll Extraction Flow</span>
                   </div>
                   <p className="text-slate-600 pl-7">
@@ -315,9 +316,9 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
                   <div className="font-bold text-slate-900 flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-[#0A192F] text-white flex items-center justify-center text-[10px]">2</span>
+                    <span className="w-5 h-5 rounded-full bg-[#0A192F] text-white flex items-center justify-center text-[10px] shrink-0">2</span>
                     <span>Campus-Specific Hostel Checkout Flow</span>
                   </div>
                   <p className="text-slate-600 pl-7">
@@ -325,9 +326,9 @@ export const TechArchitectureModal: React.FC<TechArchitectureModalProps> = ({
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
                   <div className="font-bold text-slate-900 flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-[#0A192F] text-white flex items-center justify-center text-[10px]">3</span>
+                    <span className="w-5 h-5 rounded-full bg-[#0A192F] text-white flex items-center justify-center text-[10px] shrink-0">3</span>
                     <span>Verified Review Delivery Gate</span>
                   </div>
                   <p className="text-slate-600 pl-7">

@@ -146,31 +146,34 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/60 backdrop-blur-xs">
       <div className="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col">
         
         {/* Top Header */}
-        <div className="bg-[#0A192F] px-6 py-4 flex items-center justify-between text-white border-b border-amber-500/20 shrink-0">
-          <div className="flex items-center gap-3">
+        <div className="bg-[#0A192F] px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between text-white border-b border-amber-500/20 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">
               Campus Item Details
             </span>
             <span className="text-slate-400">·</span>
-            <span className="text-xs text-slate-300 font-mono">ID: {product.id}</span>
+            <span className="text-[11px] sm:text-xs text-slate-300 font-mono truncate max-w-[120px] sm:max-w-none">
+              ID: {product.id}
+            </span>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1 rounded-md transition-colors"
+            className="text-slate-400 hover:text-white p-1.5 rounded-md transition-colors"
+            aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Scroll Area */}
-        <div className="p-6 overflow-y-auto space-y-8">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-6 sm:space-y-8">
           
           {/* Main Product Split: Gallery Left, Purchase Module Right */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
             
             {/* Gallery (md: 6 cols) */}
             <div className="md:col-span-6 space-y-3">
@@ -193,7 +196,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
 
               {/* Seller Trust Lockup */}
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500 font-medium">Student Seller</span>
                   <span className="font-semibold text-slate-900">{product.sellerName}</span>
@@ -208,13 +211,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 </div>
                 <div className="flex items-center justify-between pt-1 border-t border-slate-200">
                   <span className="text-slate-500 font-medium">Handover Spot</span>
-                  <span className="text-amber-800 font-semibold">{product.handoverLocation}</span>
+                  <span className="text-amber-800 font-semibold truncate max-w-[200px]">{product.handoverLocation}</span>
                 </div>
               </div>
             </div>
 
             {/* Purchase Module (md: 6 cols) */}
-            <div className="md:col-span-6 space-y-4">
+            <div className="md:col-span-6 space-y-3.5 sm:space-y-4">
               
               {/* Category & Status */}
               <div className="flex items-center gap-2 text-xs text-slate-500">
@@ -224,17 +227,17 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
 
               {/* Title */}
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+              <h2 className="text-lg sm:text-2xl font-bold text-slate-900 leading-tight">
                 {product.title}
               </h2>
 
               {/* Price & Rating */}
-              <div className="flex items-baseline gap-3 pt-1">
-                <span className="text-3xl font-extrabold font-mono tabular-nums text-slate-900">
+              <div className="flex items-baseline gap-2 sm:gap-3 pt-1 flex-wrap">
+                <span className="text-2xl sm:text-3xl font-extrabold font-mono tabular-nums text-slate-900">
                   ₹{product.price.toLocaleString('en-IN')}
                 </span>
                 {product.originalPrice && (
-                  <span className="text-sm text-slate-400 line-through font-mono tabular-nums">
+                  <span className="text-xs sm:text-sm text-slate-400 line-through font-mono tabular-nums">
                     ₹{product.originalPrice.toLocaleString('en-IN')}
                   </span>
                 )}
@@ -253,7 +256,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {/* Campus Handover Assurance */}
               <div className="p-3 bg-amber-50/60 border border-amber-200 rounded-xl text-xs text-amber-950 space-y-1">
                 <div className="font-bold flex items-center gap-1.5">
-                  <Truck className="w-4 h-4 text-amber-700" />
+                  <Truck className="w-4 h-4 text-amber-700 shrink-0" />
                   <span>Hostel Doorstep or Common Area Handover</span>
                 </div>
                 <p className="text-[11px] text-amber-900">
@@ -262,11 +265,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
 
               {/* Buy CTA */}
-              <div className="pt-3">
+              <div className="pt-2 sm:pt-3">
                 {product.inventoryStatus === 'Available' ? (
                   <button
                     onClick={() => onInitiateCheckout(product)}
-                    className="w-full py-3 text-sm font-semibold text-white bg-[#0A192F] hover:bg-[#162A45] rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3.5 text-sm font-semibold text-white bg-[#0A192F] hover:bg-[#162A45] rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[48px]"
                   >
                     <span>Proceed to Campus Hostel Checkout</span>
                     <Truck className="w-4 h-4 text-amber-400" />
@@ -284,14 +287,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
           {/* VERIFIED REVIEW & RATING SYSTEM SECTION */}
           <section className="pt-6 border-t border-slate-200">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
               <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-lg font-bold text-slate-900">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900">
                     Verified Peer Reviews & Ratings
                   </h3>
-                  <div className="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <div className="flex items-center gap-1 px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>Delivered-Only Constraint Enforced</span>
                   </div>
                 </div>
@@ -300,8 +303,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 </p>
               </div>
 
-              <div className="text-right">
-                <div className="text-2xl font-bold font-mono tabular-nums text-slate-900">
+              <div className="text-left sm:text-right">
+                <div className="text-xl sm:text-2xl font-bold font-mono tabular-nums text-slate-900">
                   {product.rating > 0 ? product.rating : '—'}
                   <span className="text-xs text-slate-500 font-sans font-normal ml-1">/ 5.0</span>
                 </div>
@@ -312,13 +315,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
 
             {/* VERIFICATION CONSTRAINT STATE PANEL */}
-            <div className="mb-6 p-4 rounded-xl border transition-all">
+            <div className="mb-6 p-3.5 sm:p-4 rounded-xl border transition-all">
               
               {/* Not Logged In */}
               {!currentUser && (
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500">
+                    <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                       <Lock className="w-5 h-5" />
                     </div>
                     <div>
@@ -332,7 +335,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   </div>
                   <button
                     onClick={onRequireAuth}
-                    className="px-3 py-1.5 text-xs font-semibold text-white bg-[#0A192F] rounded-lg hover:bg-[#162A45] whitespace-nowrap"
+                    className="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-white bg-[#0A192F] rounded-lg hover:bg-[#162A45] text-center min-h-[40px] flex items-center justify-center"
                   >
                     Sign In
                   </button>
@@ -343,7 +346,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {currentUser && eligibility?.canReview && (
                 <div>
                   <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 mb-2">
-                    <Unlock className="w-4 h-4 text-emerald-600" />
+                    <Unlock className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>Verified Delivery Confirmed · Review System Unlocked</span>
                   </div>
                   <p className="text-xs text-slate-600 mb-4">
@@ -351,7 +354,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   </p>
 
                   {/* Review Form */}
-                  <form onSubmit={handleSubmitReview} className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                  <form onSubmit={handleSubmitReview} className="space-y-3.5 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200">
                     
                     {reviewError && (
                       <div className="p-2.5 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
@@ -369,16 +372,17 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Select Rating (1 to 5 Stars)
                       </label>
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <button
                             key={star}
                             type="button"
                             onClick={() => setRating(star)}
-                            className="p-1 hover:scale-110 transition-transform cursor-pointer"
+                            className="p-2 hover:scale-110 transition-transform cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
+                            aria-label={`Rate ${star} stars`}
                           >
                             <Star
-                              className={`w-6 h-6 ${
+                              className={`w-6 h-6 sm:w-6 sm:h-6 ${
                                 star <= rating
                                   ? 'fill-amber-400 text-amber-400'
                                   : 'text-slate-300'
@@ -402,7 +406,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         value={headline}
                         onChange={(e) => setHeadline(e.target.value)}
                         placeholder="e.g. Excellent gear shifting, delivered right to Hall 3 mess!"
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-[#0A192F]"
+                        className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#0A192F] min-h-[44px]"
                         required
                       />
                     </div>
@@ -417,7 +421,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="Detail the condition, battery/functionality, and timeliness of handover on campus..."
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-[#0A192F]"
+                        className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#0A192F]"
                         required
                       />
                     </div>
@@ -429,10 +433,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         id="conditionCheck"
                         checked={conditionAsDescribed}
                         onChange={(e) => setConditionAsDescribed(e.target.checked)}
-                        className="rounded text-[#0A192F]"
+                        className="rounded text-[#0A192F] w-4 h-4"
                       />
                       <label htmlFor="conditionCheck" className="text-xs text-slate-700">
-                        Item condition exactly matched seller description upon handover
+                        Item condition matched seller description upon handover
                       </label>
                     </div>
 
@@ -441,7 +445,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       <button
                         type="submit"
                         disabled={submittingReview}
-                        className="px-4 py-2 text-xs font-semibold text-white bg-[#0A192F] hover:bg-[#162A45] rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                        className="w-full sm:w-auto px-5 py-2.5 text-xs font-semibold text-white bg-[#0A192F] hover:bg-[#162A45] rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 min-h-[44px]"
                       >
                         <Send className="w-3.5 h-3.5" />
                         <span>{submittingReview ? 'Verifying & Posting...' : 'Publish Verified Student Review'}</span>
@@ -454,13 +458,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               {/* Logged in: Case 2 - PENDING DELIVERY (Premature Review Blocked) */}
               {currentUser && !eligibility?.canReview && eligibility?.reason === 'order_pending_delivery' && (
-                <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4">
+                <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-3.5 sm:p-4">
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0">
                       <Lock className="w-4 h-4" />
                     </div>
                     <div className="flex-1">
-                      <div className="text-xs font-bold text-amber-950 flex items-center gap-2">
+                      <div className="text-xs font-bold text-amber-950 flex items-center gap-2 flex-wrap">
                         <span>Strict Constraint: Premature Review Locked</span>
                         <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-200/80 text-amber-900">
                           Status: {eligibility.order?.status}
@@ -470,8 +474,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         {eligibility.message}
                       </p>
                       
-                      {/* Interactive simulation action so tester can immediately verify */}
-                      <div className="mt-3 pt-3 border-t border-amber-200/80 flex items-center justify-between flex-wrap gap-2">
+                      {/* Interactive simulation action */}
+                      <div className="mt-3 pt-3 border-t border-amber-200/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
                         <span className="text-[11px] text-amber-800">
                           Did you just receive this item at your hostel?
                         </span>
@@ -479,7 +483,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                           type="button"
                           onClick={handleSimulateDeliveryConfirmation}
                           disabled={confirmingDelivery}
-                          className="px-3 py-1.5 text-xs font-semibold text-[#0A192F] bg-amber-400 hover:bg-amber-300 rounded-lg shadow-2xs transition-colors flex items-center gap-1.5 cursor-pointer"
+                          className="w-full sm:w-auto px-3.5 py-2 text-xs font-semibold text-[#0A192F] bg-amber-400 hover:bg-amber-300 rounded-lg shadow-2xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer min-h-[40px]"
                         >
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           <span>{confirmingDelivery ? 'Updating...' : 'I Received This Item (Confirm Delivered)'}</span>
@@ -492,7 +496,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               {/* Logged in: Case 3 - NOT ORDERED */}
               {currentUser && !eligibility?.canReview && eligibility?.reason === 'not_ordered' && (
-                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between flex-wrap gap-3">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center shrink-0">
                       <Lock className="w-4 h-4" />
@@ -509,7 +513,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   {product.inventoryStatus === 'Available' && (
                     <button
                       onClick={() => onInitiateCheckout(product)}
-                      className="px-3 py-1.5 text-xs font-semibold text-white bg-[#0A192F] rounded-lg hover:bg-[#162A45] whitespace-nowrap"
+                      className="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-white bg-[#0A192F] rounded-lg hover:bg-[#162A45] whitespace-nowrap text-center min-h-[40px] flex items-center justify-center"
                     >
                       Buy with Hostel Delivery
                     </button>
@@ -528,18 +532,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
 
             {/* List of Existing Verified Reviews */}
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               {reviews.length === 0 ? (
-                <div className="text-center py-8 text-xs text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                <div className="text-center py-6 sm:py-8 text-xs text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200 p-4">
                   No verified peer reviews yet for this product. Be the first student buyer to review after hostel delivery!
                 </div>
               ) : (
                 reviews.map((rev) => (
                   <div
                     key={rev.id}
-                    className="p-4 rounded-xl bg-white border border-slate-200 text-xs space-y-2 hover:border-slate-300 transition-colors"
+                    className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200 text-xs space-y-2 hover:border-slate-300 transition-colors"
                   >
-                    <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-start sm:items-center justify-between flex-col sm:flex-row gap-1.5">
                       <div className="flex items-center gap-2">
                         {/* 5-star display */}
                         <div className="flex items-center text-amber-400">
@@ -554,7 +558,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                             />
                           ))}
                         </div>
-                        <span className="font-bold text-slate-900 text-sm">
+                        <span className="font-bold text-slate-900 text-xs sm:text-sm">
                           {rev.headline}
                         </span>
                       </div>
@@ -570,20 +574,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       "{rev.comment}"
                     </p>
 
-                    <div className="flex items-center gap-2 text-[11px] text-slate-500 pt-1 border-t border-slate-100 flex-wrap">
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] text-slate-500 pt-1 border-t border-slate-100 flex-wrap">
                       <span className="font-semibold text-slate-800">{rev.buyerName}</span>
                       <span>·</span>
                       <span className="font-mono">{rev.buyerRoll}</span>
                       <span>·</span>
-                      <span>{rev.buyerHostel}</span>
+                      <span>{rev.buyerHostel.split(' ')[0]} {rev.buyerHostel.includes('3') ? '3' : rev.buyerHostel.includes('4') ? '4' : 'G'}</span>
                       <span>·</span>
                       <span>{new Date(rev.createdAt).toLocaleDateString()}</span>
-                      {rev.conditionAsDescribed && (
-                        <>
-                          <span>·</span>
-                          <span className="text-emerald-600">✓ Condition matched listing</span>
-                        </>
-                      )}
                     </div>
                   </div>
                 ))

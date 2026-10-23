@@ -13,6 +13,8 @@ import {
   PlusCircle,
   Layers,
   ArrowRight,
+  Store,
+  User as UserIcon,
 } from 'lucide-react';
 import { User, Product, Order, ProductCategory, InventoryStatus } from './types';
 import { storage } from './services/storage';
@@ -187,11 +189,11 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 font-sans">
+    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 font-sans pb-16 lg:pb-0">
       
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#0A192F] text-white px-4 py-3 rounded-xl shadow-xl border border-amber-400/40 text-xs flex items-center gap-2.5 animate-in slide-in-from-bottom-3 duration-200 max-w-md">
+        <div className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 z-50 bg-[#0A192F] text-white px-4 py-3 rounded-xl shadow-xl border border-amber-400/40 text-xs flex items-center gap-2.5 animate-in slide-in-from-bottom-3 duration-200 max-w-sm sm:max-w-md">
           <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
           <span className="leading-snug">{toastMessage}</span>
         </div>
@@ -199,17 +201,17 @@ export default function App() {
 
       {/* Guest Mode Notice Bar */}
       {!currentUser && guestBrowsing && (
-        <div className="bg-[#0A192F] text-amber-300 px-4 py-2 text-xs flex items-center justify-between border-b border-amber-500/20">
-          <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-white">Guest Preview Mode:</span>
-              <span className="text-slate-300">Sign in with @iiitdmj.ac.in to place hostel orders and list products.</span>
+        <div className="bg-[#0A192F] text-amber-300 px-3 sm:px-4 py-2 text-xs flex items-center justify-between border-b border-amber-500/20">
+          <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 truncate">
+              <span className="font-semibold text-white shrink-0">Guest Mode:</span>
+              <span className="text-slate-300 truncate">Sign in with @iiitdmj.ac.in to place hostel orders and list products.</span>
             </div>
             <button
               onClick={() => setGuestBrowsing(false)}
-              className="px-3 py-1 bg-[#F59E0B] text-[#0A192F] font-bold rounded-lg hover:bg-amber-400 transition-colors shrink-0"
+              className="px-2.5 sm:px-3 py-1 bg-[#F59E0B] text-[#0A192F] font-bold rounded-lg hover:bg-amber-400 transition-colors shrink-0 text-[11px] sm:text-xs"
             >
-              Sign In with IIITDMJ Email
+              Sign In
             </button>
           </div>
         </div>
@@ -294,21 +296,21 @@ export default function App() {
             />
 
             {/* Marketplace Catalog Section */}
-            <section id="catalog-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <section id="catalog-section" className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6 sm:space-y-8">
               
               {/* Search & Filter Bar */}
-              <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
+              <div className="bg-white rounded-2xl border border-slate-200 p-3.5 sm:p-5 shadow-xs space-y-3 sm:space-y-4">
                 
                 {/* Search Bar & Hostel Selector */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3">
                   <div className="md:col-span-8 relative">
-                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search cycles, CLRS textbook, cooler, mattress, monitor, Arduino kit..."
-                      className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0A192F]"
+                      className="w-full pl-10 pr-4 py-2 sm:py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0A192F] min-h-[44px]"
                     />
                   </div>
 
@@ -316,7 +318,7 @@ export default function App() {
                     <select
                       value={selectedHostel}
                       onChange={(e) => setSelectedHostel(e.target.value)}
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0A192F]"
+                      className="w-full px-3 py-2 sm:py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0A192F] min-h-[44px]"
                     >
                       <option value="All">All Hostels (Hall 1, 3, 4, Panini...)</option>
                       {HOSTELS_LIST.map((h) => (
@@ -326,13 +328,13 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Category Filter Tabs (Functional segmented buttons, not pill badge spam) */}
-                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 scrollbar-none">
+                {/* Category Filter Tabs (Horizontal scrolling with touch momentum) */}
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-0.5 scrollbar-none">
                   {CATEGORIES.map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 cursor-pointer min-h-[36px] flex items-center ${
                         selectedCategory === cat
                           ? 'bg-[#0A192F] text-white shadow-2xs'
                           : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
@@ -346,9 +348,9 @@ export default function App() {
               </div>
 
               {/* Grid Header & Result Counter */}
-              <div className="flex items-center justify-between flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
                     {selectedCategory === 'All' ? 'Campus Peer Listings' : selectedCategory}
                   </h2>
                   <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
@@ -358,12 +360,12 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   {/* Option to load sample demo items for testing */}
                   {products.length === 0 && (
                     <button
                       onClick={handleLoadSampleData}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white border border-slate-300 rounded-lg transition-colors shadow-2xs"
+                      className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white border border-slate-300 rounded-lg transition-colors shadow-2xs min-h-[40px]"
                     >
                       <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                       <span>Load Sample Demo Items</span>
@@ -372,7 +374,7 @@ export default function App() {
 
                   <button
                     onClick={() => setArchitectureModalOpen(true)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200/80 rounded-lg transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200/80 rounded-lg transition-colors min-h-[40px]"
                   >
                     <Code2 className="w-3.5 h-3.5 text-amber-700" />
                     <span>Tech Architecture & Schema</span>
@@ -383,24 +385,24 @@ export default function App() {
               {/* Product Grid Or Empty Marketplace State */}
               {products.length === 0 ? (
                 /* INITIAL EMPTY MARKETPLACE (No mock products shown initially) */
-                <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-xl mx-auto shadow-xs">
-                  <div className="w-16 h-16 rounded-2xl bg-slate-100 text-[#0A192F] flex items-center justify-center mx-auto mb-4">
-                    <Package className="w-8 h-8 text-slate-400" />
+                <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-12 text-center max-w-xl mx-auto shadow-xs">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-100 text-[#0A192F] flex items-center justify-center mx-auto mb-4">
+                    <Package className="w-7 h-7 sm:w-8 sm:h-8 text-slate-400" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900">
                     No Campus Products Listed Yet
                   </h3>
                   <p className="text-xs text-slate-500 max-w-md mx-auto mt-2 leading-relaxed">
                     IIITDMJ Campus Bazaar starts clean with zero pre-populated items. Students can list their used or new bicycles, textbooks, air coolers, room decor, and electronics.
                   </p>
                   
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 mt-6">
                     <button
                       onClick={() => {
                         if (!currentUser) setGuestBrowsing(false);
                         else setActiveView('seller');
                       }}
-                      className="w-full sm:w-auto px-5 py-2.5 text-xs font-semibold text-white bg-[#0A192F] hover:bg-[#162A45] rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                      className="w-full sm:w-auto px-5 py-2.5 text-xs font-semibold text-white bg-[#0A192F] hover:bg-[#162A45] rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
                     >
                       <PlusCircle className="w-4 h-4 text-amber-400" />
                       <span>List the First Campus Product</span>
@@ -408,16 +410,16 @@ export default function App() {
 
                     <button
                       onClick={handleLoadSampleData}
-                      className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors flex items-center justify-center gap-2"
+                      className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors flex items-center justify-center gap-2 min-h-[44px]"
                     >
                       <Sparkles className="w-4 h-4 text-amber-500" />
-                      <span>Load Sample Test Items (Cycles, Books, Cooler)</span>
+                      <span>Load Sample Test Items</span>
                     </button>
                   </div>
                 </div>
               ) : filteredProducts.length === 0 ? (
                 /* Search Filter Empty State */
-                <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-lg mx-auto">
+                <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center max-w-lg mx-auto">
                   <Package className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                   <h3 className="text-base font-bold text-slate-800">
                     No items match your filter
@@ -431,13 +433,13 @@ export default function App() {
                       setSelectedCategory('All');
                       setSelectedHostel('All');
                     }}
-                    className="px-4 py-2 text-xs font-semibold text-[#0A192F] bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+                    className="px-4 py-2 text-xs font-semibold text-[#0A192F] bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors min-h-[44px]"
                   >
                     Reset All Filters
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {filteredProducts.map((prod) => (
                     <ProductCard
                       key={prod.id}
@@ -462,9 +464,9 @@ export default function App() {
       </main>
 
       {/* Campus Footer */}
-      <footer className="mt-auto bg-[#0A192F] text-slate-400 py-10 border-t border-amber-500/20 text-xs">
+      <footer className="mt-auto bg-[#0A192F] text-slate-400 py-8 sm:py-10 border-t border-amber-500/20 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
             
             <div className="space-y-2 md:col-span-2">
               <div className="flex items-center gap-2 text-white font-bold text-base">
@@ -476,7 +478,7 @@ export default function App() {
               <p className="text-slate-400 text-xs max-w-md leading-relaxed">
                 Pandit Dwarka Prasad Mishra Indian Institute of Information Technology, Design and Manufacturing Jabalpur. Dumna Nature Park Road, Jabalpur, Madhya Pradesh - 482005.
               </p>
-              <div className="flex items-center gap-2 text-[11px] text-amber-400 pt-1">
+              <div className="flex items-center gap-2 text-[11px] text-amber-400 pt-1 flex-wrap">
                 <span>Verified @iiitdmj.ac.in Student Network</span>
                 <span>·</span>
                 <span>Delivered-Only Verified Reviews</span>
@@ -543,7 +545,7 @@ export default function App() {
 
           </div>
 
-          <div className="pt-6 border-t border-white/10 flex items-center justify-between flex-wrap gap-4 text-[11px] text-slate-500">
+          <div className="pt-4 sm:pt-6 border-t border-white/10 flex items-center justify-between flex-wrap gap-2 text-[11px] text-slate-500">
             <div>
               © 2026 PDPM IIITDM Jabalpur Student Body. Built for Campus Peer-to-Peer Exchange.
             </div>
@@ -553,6 +555,65 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* MOBILE BOTTOM NAVIGATION BAR (Visible on mobile/tablet devices) */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-1.5 px-3 flex items-center justify-around shadow-lg">
+        <button
+          onClick={() => {
+            setActiveView('buyer');
+            setShowBuyerOrders(false);
+          }}
+          className={`flex flex-col items-center py-1 px-3 rounded-lg text-[10px] font-semibold transition-colors ${
+            activeView === 'buyer' && !showBuyerOrders
+              ? 'text-[#0A192F]'
+              : 'text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <ShoppingBag className={`w-5 h-5 ${activeView === 'buyer' && !showBuyerOrders ? 'stroke-[2.5]' : ''}`} />
+          <span className="mt-0.5">Marketplace</span>
+        </button>
+
+        <button
+          onClick={() => {
+            setActiveView('seller');
+            setShowBuyerOrders(false);
+          }}
+          className={`flex flex-col items-center py-1 px-3 rounded-lg text-[10px] font-semibold transition-colors ${
+            activeView === 'seller'
+              ? 'text-amber-600 font-bold'
+              : 'text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Store className={`w-5 h-5 ${activeView === 'seller' ? 'stroke-[2.5]' : ''}`} />
+          <span className="mt-0.5">Seller</span>
+        </button>
+
+        <button
+          onClick={() => {
+            if (!currentUser) setGuestBrowsing(false);
+            else {
+              setShowBuyerOrders(true);
+              setActiveView('buyer');
+            }
+          }}
+          className={`flex flex-col items-center py-1 px-3 rounded-lg text-[10px] font-semibold transition-colors ${
+            showBuyerOrders
+              ? 'text-[#0A192F]'
+              : 'text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Package className={`w-5 h-5 ${showBuyerOrders ? 'stroke-[2.5]' : ''}`} />
+          <span className="mt-0.5">My Orders</span>
+        </button>
+
+        <button
+          onClick={() => setArchitectureModalOpen(true)}
+          className="flex flex-col items-center py-1 px-3 rounded-lg text-[10px] font-semibold text-slate-500 hover:text-amber-800 transition-colors"
+        >
+          <Code2 className="w-5 h-5" />
+          <span className="mt-0.5">Specs</span>
+        </button>
+      </nav>
 
       {/* MODALS */}
       {/* 1. Auth & Smart Onboarding Modal (when triggered while in-app) */}
