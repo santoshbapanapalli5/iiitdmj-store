@@ -5,9 +5,11 @@
  * ============================================================================
  */
 
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -263,10 +265,29 @@ app.get('/api/health', (_req: Request, res: Response) => {
   });
 });
 
+// Serve frontend production build in production or when dist exists
+const distPath = path.resolve(process.cwd(), 'dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+
+  app.get('*', (req: Request, res: Response, next: NextFunction) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    const indexPath = path.join(distPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      return res.sendFile(indexPath);
+    }
+    next();
+  });
+}
+
 export default app;
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
-    console.log(`IIITDMJ Campus Bazaar server running on port ${PORT}`);
+  const listenPort = Number(PORT) || 3000;
+  app.listen(listenPort, '0.0.0.0', () => {
+    console.log(`IIITDMJ Campus Bazaar server running on port ${listenPort}`);
   });
 }
+
