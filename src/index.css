@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-iiit-navy: #0a192f;
+  --color-iiit-navy-light: #162a45;
+  --color-iiit-navy-dark: #060e1a;
+  --color-iiit-gold: #f59e0b;
+  --color-iiit-gold-deep: #d97706;
+  --color-iiit-gold-light: #fef3c7;
+}
+
+body {
+  font-family: var(--font-sans);
+}

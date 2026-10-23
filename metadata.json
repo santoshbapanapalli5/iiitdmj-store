@@ -1,0 +1,8 @@
+{
+  "name": "IIITDMJ Campus Bazaar",
+  "description": "Exclusive peer-to-peer campus marketplace for students of PDPM IIITDM Jabalpur featuring verified @iiitdmj.ac.in authentication, hostel delivery checkout, dual buyer/seller dashboards, and verified delivered-order review system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
